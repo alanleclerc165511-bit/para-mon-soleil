@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para mi solecito ❤️</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    background:black;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    font-family:Arial;
+    color:white;
+}
+
+/* BOTÓN */
+#btn{
+    padding:15px 30px;
+    font-size:20px;
+    border:none;
+    border-radius:20px;
+    background:#8b0000;
+    color:white;
+    cursor:pointer;
+    box-shadow:0 0 20px red;
+    transition:0.3s;
+}
+
+#btn:hover{
+    transform:scale(1.1);
+}
+
+/* MENSAJE */
+#mensaje{
+    display:none;
+    position:absolute;
+    text-align:center;
+}
+
+h1{
+    font-size:40px;
+    text-shadow:0 0 10px red,0 0 30px red;
+}
+
+/* RELÁMPAGOS */
+.rayo{
+    position:absolute;
+    width:2px;
+    height:100vh;
+    background:linear-gradient(white, transparent);
+    opacity:0.8;
+    animation:flash 0.3s linear;
+}
+
+@keyframes flash{
+    0%{opacity:0;}
+    50%{opacity:1;}
+    100%{opacity:0;}
+}
+
+/* ELEMENTOS */
+.elemento{
+    position:absolute;
+    animation:flotar linear infinite;
+}
+
+@keyframes flotar{
+    0%{
+        transform:translateY(100vh);
+        opacity:1;
+    }
+    100%{
+        transform:translateY(-10vh);
+        opacity:0;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<button id="btn">Entrar al Upside Down ❤️</button>
+
+<div id="mensaje">
+    <h1>Para mi entrenador favorito ❤️</h1>
+    <p>
+    Contigo incluso el Upside Down se siente bonito 🖤<br><br>
+
+    Eres mi persona especial,<br>
+    mi aventura favorita ⚡<br><br>
+
+    Si fueras un Pokémon...<br>
+    te elegiría siempre 💖
+    </p>
+</div>
+
+<!-- MÚSICA -->
+<audio id="musica" loop>
+    <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+const btn = document.getElementById("btn");
+const mensaje = document.getElementById("mensaje");
+const musica = document.getElementById("musica");
+
+btn.addEventListener("click", ()=>{
+    btn.style.display = "none";
+    mensaje.style.display = "block";
+
+    musica.play();
+
+    setInterval(()=>crearElemento("❤️"),400);
+    setInterval(()=>crearElemento("⚪🔴"),800);
+    setInterval(()=>crearRayo(),300);
+});
+
+/* CORAZONES Y POKEBOLAS */
+function crearElemento(emoji){
+    const el = document.createElement("div");
+    el.className = "elemento";
+    el.innerHTML = emoji;
+
+    el.style.left = Math.random()*100 + "vw";
+    el.style.fontSize = (20 + Math.random()*30) + "px";
+    el.style.animationDuration = (4 + Math.random()*3) + "s";
+
+    document.body.appendChild(el);
+
+    setTimeout(()=>el.remove(),7000);
+}
+
+/* RELÁMPAGOS */
+function crearRayo(){
+    const rayo = document.createElement("div");
+    rayo.className = "rayo";
+    rayo.style.left = Math.random()*100 + "vw";
+
+    document.body.appendChild(rayo);
+
+    setTimeout(()=>rayo.remove(),300);
+}
+
+</script>
+
+</body>
+</html>
